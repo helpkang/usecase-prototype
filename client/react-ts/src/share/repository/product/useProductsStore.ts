@@ -1,11 +1,10 @@
 import { create } from "zustand";
 import { Product } from "./Product";
-import { v4 as uuid } from "uuid";
 
 type ProductsStore = {
   products: Product[];
   addProductOrUpdate: (product: Product) => void;
-  removeProduct: (id: string) => void;
+  removeProduct: (id: number) => void;
 };
 
 export const useProductsStore = create<ProductsStore>((set) => ({
@@ -13,12 +12,19 @@ export const useProductsStore = create<ProductsStore>((set) => ({
   addProductOrUpdate: (product) => {
     if (product.id) {
       set((state) => ({
-        products: state.products.map((p) => (p.id === product.id ? product : p)),
+        products: state.products.map((p) =>
+          p.id === product.id ? product : p
+        ),
       }));
       return;
     }
-    const newProduct = {...product, id: uuid()}
-    set((state) => ({ products: [...state.products, newProduct] }));
+
+    set((state) => {
+      const maxProductId =
+        state.products.reduce((max, p) => (p.id > max ? p.id : max), 0) + 1;
+      const nproduct = { ...product, id: maxProductId };
+      return { products: [...state.products, nproduct] };
+    });
   },
   removeProduct: (id) =>
     set((state) => ({

@@ -7,7 +7,7 @@ type ProductStore = {
 };
 
 export const useProductStore = create<ProductStore>((set) => ({
-  product: { id: "", name: "", price: 0 },
+  product: { id: 0, name: "", price: 0 },
   setProduct: (product) => {
     set({ product })
   },

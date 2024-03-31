@@ -15,7 +15,7 @@ export class ProductsService {
      * @returns ProductCOVO
      * @throws ApiError
      */
-    public static productControllerSearchProductByNameAndPrice(
+    public static searchProductByNameAndPrice(
         name?: string,
         price?: number,
     ): CancelablePromise<Array<ProductCOVO>> {
@@ -34,7 +34,7 @@ export class ProductsService {
      * @returns ProductCOVO
      * @throws ApiError
      */
-    public static productControllerGetProduct(
+    public static getProduct(
         id: number,
     ): CancelablePromise<ProductCOVO> {
         return __request(OpenAPI, {
@@ -52,7 +52,7 @@ export class ProductsService {
      * @returns ProductCOVO
      * @throws ApiError
      */
-    public static productControllerUpdateProduct(
+    public static updateProduct(
         id: number,
         requestBody: ProductCIVO,
     ): CancelablePromise<ProductCOVO> {
@@ -72,7 +72,7 @@ export class ProductsService {
      * @returns any
      * @throws ApiError
      */
-    public static productControllerDeleteProduct(
+    public static deleteProduct(
         id: number,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
@@ -88,7 +88,7 @@ export class ProductsService {
      * @returns ProductCOVO
      * @throws ApiError
      */
-    public static productControllerGetAllProducts(): CancelablePromise<Array<ProductCOVO>> {
+    public static getAllProducts(): CancelablePromise<Array<ProductCOVO>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/products',
@@ -100,7 +100,7 @@ export class ProductsService {
      * @returns ProductCOVO
      * @throws ApiError
      */
-    public static productControllerCreateProduct(
+    public static createProduct(
         requestBody: ProductCIVO,
     ): CancelablePromise<ProductCOVO> {
         return __request(OpenAPI, {

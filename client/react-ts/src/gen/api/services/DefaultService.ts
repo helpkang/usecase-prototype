@@ -10,7 +10,7 @@ export class DefaultService {
      * @returns any
      * @throws ApiError
      */
-    public static appControllerRoot(): CancelablePromise<any> {
+    public static root(): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/',

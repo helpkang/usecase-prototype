@@ -22,7 +22,7 @@ export function useProductLocalUseCase() {
       return;
     }
     repoAddProduct(product!);
-    setProduct({ id: "", name: "", price: 0 });
+    setProduct({ id: 0, name: "", price: 0 });
   }, [product, repoAddProduct, setProduct, setError]);
 
   useEffect(() => {

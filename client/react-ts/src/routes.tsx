@@ -1,5 +1,5 @@
 // routes.ts
-import ProductLocalContainer from "./page/product/api/ProductLocalContainer";
+import ProductLocalContainer from "./page/product/local/ProductLocalContainer";
 import Home from "./samples/Home";
 import { createBrowserRouter } from "react-router-dom";
 

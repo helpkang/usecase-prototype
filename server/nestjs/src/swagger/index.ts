@@ -14,6 +14,12 @@ export const setupSwagger = (app: INestApplication) => {
     .setVersion(SWAGGER_API_CURRENT_VERSION)
     .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, options);
+  const document = SwaggerModule.createDocument(app, options, {
+    ignoreGlobalPrefix: true,
+    operationIdFactory: (
+      controllerKey: string,
+      methodKey: string
+    ) => methodKey
+  });
   SwaggerModule.setup(SWAGGER_API_ROOT, app, document);
 };

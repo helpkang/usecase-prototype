@@ -13,7 +13,7 @@ export class AuthenticationService {
      * @returns any Successful Login
      * @throws ApiError
      */
-    public static authControllerLogin(
+    public static login(
         requestBody: LoginPayload,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
@@ -32,7 +32,7 @@ export class AuthenticationService {
      * @returns any Successful Registration
      * @throws ApiError
      */
-    public static authControllerRegister(
+    public static register(
         requestBody: RegisterPayload,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
@@ -50,7 +50,7 @@ export class AuthenticationService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static authControllerGetLoggedInUser(): CancelablePromise<any> {
+    public static getLoggedInUser(): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/auth/me',

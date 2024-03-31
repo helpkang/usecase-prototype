@@ -7,7 +7,7 @@ import {
 
 import { useProductLocalUseCase } from "../useProductLocalUseCase";
 import { createWrapper } from "../../../../share/test/createWrapper";
-describe("useProductUseCase", () => {
+describe("useProductLocalUseCase", () => {
   let hook: RenderHookResult<
     ReturnType<typeof useProductLocalUseCase>,
     unknown
@@ -27,14 +27,14 @@ describe("useProductUseCase", () => {
       });
     });
     await act(async () => {
-      await result.current.setProduct({ id: "", name: "", price: 0 });
+      await result.current.setProduct({ id: 0, name: "", price: 0 });
     });
   });
 
   it("should create a product", async () => {
     const { result } = hook;
     await act(async () => {
-      result.current.setProduct({ id: "", name: "Test1", price: 1 });
+      result.current.setProduct({ id: 0, name: "Test1", price: 1 });
     });
     await act(async () => {
       result.current.addProductOrUpdate();
@@ -59,7 +59,7 @@ describe("useProductUseCase", () => {
 
     expect(result.current.products).toEqual([]);
     await act(async () => {
-      result.current.setProduct({ id: "", name: "T", price: 100 });
+      result.current.setProduct({ id: 1, name: "T", price: 100 });
     });
     await act(async () => {
       result.current.addProductOrUpdate();
@@ -73,7 +73,7 @@ describe("useProductUseCase", () => {
     });
 
     await act(async () => {
-      result.current.removeProduct("1");
+      result.current.removeProduct(1);
     });
     await waitFor(async () => {
       expect(result.current.products).not.toContainEqual({
