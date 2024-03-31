@@ -5,8 +5,9 @@ export default function Home(){
     <>
       <menu>
         <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/users">Users</Link>
+        |
+        <Link to="/product-local">Product-Local</Link>
+        <Link to="/product-api">Product-API</Link>
       </menu>
       <Outlet/>
     </>

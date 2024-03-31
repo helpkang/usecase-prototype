@@ -1,7 +1,6 @@
 // routes.ts
+import ProductLocalContainer from "./page/product/api/ProductLocalContainer";
 import Home from "./samples/Home";
-import About from "./samples/About"; // Import the 'About' component
-import Users from "./samples/Users";
 import { createBrowserRouter } from "react-router-dom";
 
 const routes = createBrowserRouter([
@@ -9,8 +8,7 @@ const routes = createBrowserRouter([
     path: "/",
     element: <Home />,
     children: [
-      { path: "/about", element: <About /> },
-      { path: "/users", element: <Users /> },
+      {path: "product-local", element: <ProductLocalContainer/>},
       { path: "*", element: <div>Not Found</div>},
     ],
   },

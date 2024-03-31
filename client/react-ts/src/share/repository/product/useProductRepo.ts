@@ -9,7 +9,7 @@ export const useProductRepo = () => {
     product: productStore.product,
     setProduct: productStore.setProduct,
     products: productsStore.products,
-    addProduct: productsStore.addProduct,
+    addProduct: productsStore.addProductOrUpdate,
     removeProduct: productsStore.removeProduct,
   };
 }
