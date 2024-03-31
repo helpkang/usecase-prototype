@@ -1,18 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useProductRepo } from "../../../share/repository/product/useProductRepo";
-import { z } from "zod";
 import { Product } from "../../../share/repository/product/Product";
-
-const productSchema = z.object({
-  name: z
-    .string()
-    .min(3, { message: "Name must be at least 3 characters long" })
-    .max(100, { message: "Name must be no more than 100 characters long" }),
-  price: z
-    .number()
-    .min(0.5, { message: "Price must be at least 0.5" })
-    .max(10000, { message: "Price must be no more than 10,000" }),
-});
+import { productSchema } from "../schema/productSchema";
 
 export function useProductLocalUseCase() {
   const {
