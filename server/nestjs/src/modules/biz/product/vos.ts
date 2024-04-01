@@ -1,12 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, IsNumber, Min, Max } from 'class-validator';
+import { Expose } from 'class-transformer';
+import { IsString, Length, IsNumber, Min, Max, IsDefined } from 'class-validator';
 
 export class ProductCIVO {
+  @IsDefined()
   @ApiProperty({ description: 'The name of the product' })
   @IsString()
   @Length(3, 100)
   name: string;
 
+  @IsDefined()
   @ApiProperty({ description: 'The price of the product' })
   @IsNumber()
   @Min(0.5)

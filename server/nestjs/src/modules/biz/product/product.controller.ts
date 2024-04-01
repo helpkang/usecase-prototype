@@ -4,7 +4,7 @@ import { ProductUseCase, ProductUseCaseToken } from 'base/usecase/product/produc
 import { ProductCIVO, ProductCOVO } from './vos';
 
 @ApiTags('products')
-@Controller('products')
+@Controller('api/products')
 export class ProductController {
   constructor(@Inject(ProductUseCaseToken)private readonly productUseCase: ProductUseCase) {}
 

@@ -24,6 +24,9 @@ export class ProductRepositoryImpl implements ProductRepository{
   }
 
   async createProduct(productData: Partial<ProductRIVO>): Promise<ProductROVO> {
+    //TODO: id from request body should be removed nestjs problem - Security Risk
+    //TODO: remove this console.log 
+    console.log('productData', productData);
     const product = this.productDAO.create(productData);
     return this.productDAO.save(product);
   }
