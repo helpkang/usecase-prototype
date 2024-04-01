@@ -1,9 +1,10 @@
+import { Box } from "../../share/style/Box";
+import { useProductApiUseCase } from "./useProductApilUseCase";
 import EditView from "./view/EditView";
 import ListView from "./view/ListView";
-import { useProductLocalUseCase } from "./useProductLocalUseCase";
-import { Box } from "./style/Box";
 
-export default function ProductLocalContainer() {
+
+export default function ProductApiContainer() {
   const {
     setFilterStr,
     product,
@@ -14,7 +15,7 @@ export default function ProductLocalContainer() {
     error,
     price,
     setPrice,
-  } = useProductLocalUseCase();
+  } = useProductApiUseCase();
 
   return (
     <div>
@@ -27,7 +28,7 @@ export default function ProductLocalContainer() {
         />
       </Box>
       <ListView
-        products={filteredProducts}
+        products={filteredProducts ? filteredProducts : []}
         removeProduct={removeProduct}
         setProduct={setProduct}
       />

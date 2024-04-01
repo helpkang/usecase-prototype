@@ -5,30 +5,37 @@ import {
   RenderHookResult,
 } from "@testing-library/react";
 
-import { useProductLocalUseCase } from "../useProductLocalUseCase";
-import { createWrapper } from "../../../../share/test/createWrapper";
-describe("useProductLocalUseCase", () => {
-  let hook: RenderHookResult<
-    ReturnType<typeof useProductLocalUseCase>,
-    unknown
-  >;
+import { useProductApiUseCase } from "../../local/useProductApilUseCase";
+import { createWrapper } from "../../../share/test/createWrapper";
+import { userProductServiceMock } from "./ProductsService.mock";
+import sinon from "ts-sinon";
+describe("useProductUseCase", () => {
+  let hook: RenderHookResult<ReturnType<typeof useProductApiUseCase>, unknown>;
 
   beforeEach(async () => {
-    hook = renderHook(() => useProductLocalUseCase(), {
-      wrapper: createWrapper(),
-    });
+    userProductServiceMock();
+    hook = renderHook(
+      () => {
+        return useProductApiUseCase();
+      },
+      {
+        wrapper: createWrapper(),
+      }
+    );
   });
 
   afterEach(async () => {
     const { result } = hook;
     await act(async () => {
-      result.current.products.forEach(async (product) => {
+      result.current.products?.forEach(async (product) => {
         await result.current.removeProduct(product.id);
       });
     });
     await act(async () => {
       await result.current.setProduct({ id: 0, name: "", price: 0 });
     });
+    sinon.restore();
+    sinon.reset();
   });
 
   it("should create a product", async () => {
@@ -41,25 +48,24 @@ describe("useProductLocalUseCase", () => {
     });
     await waitFor(async () => {
       expect(
-        result.current.products.map((product) => ({
+        result.current.products?.map((product) => ({
           name: product.name,
           price: product.price,
         }))
-      ).toContainEqual(
-        {
-          name: "Test1",
-          price: 1,
-        },
-      );
+      ).toContainEqual({
+        name: "Test1",
+        price: 1,
+      });
     });
   });
 
   it("should delete a product", async () => {
     const { result } = hook;
-
-    expect(result.current.products).toEqual([]);
+    await waitFor(async () => {
+      expect(result.current.products).toEqual([]);
+    });
     await act(async () => {
-      result.current.setProduct({ id: 1, name: "T", price: 100 });
+      result.current.setProduct({ id: 0, name: "T", price: 100 });
     });
     await act(async () => {
       result.current.addProductOrUpdate();

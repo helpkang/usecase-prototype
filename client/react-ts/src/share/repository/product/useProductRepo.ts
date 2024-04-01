@@ -1,15 +1,14 @@
-import { useProductStore } from './useProductStore';
-import { useProductsStore } from './useProductsStore';
+import { create } from "zustand";
+import { Product } from "./Product";
 
-export const useProductRepo = () => {
-  const productStore = useProductStore();
-  const productsStore = useProductsStore();
+type ProductRepoType = {
+  product: Product;
+  setProduct: (product: Product) => void;
+};
 
-  return {
-    product: productStore.product,
-    setProduct: productStore.setProduct,
-    products: productsStore.products,
-    addProduct: productsStore.addProductOrUpdate,
-    removeProduct: productsStore.removeProduct,
-  };
-}
+export const useProductRepo = create<ProductRepoType>((set) => ({
+  product: { id: 0, name: "", price: 0 },
+  setProduct: (product) => {
+    set({ product })
+  },
+}));

@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { Product } from "./Product";
 
-type ProductsStore = {
+type ProductsRepoType = {
   products: Product[];
   addProductOrUpdate: (product: Product) => void;
   removeProduct: (id: number) => void;
 };
 
-export const useProductsStore = create<ProductsStore>((set) => ({
+export const useProductsRepo = create<ProductsRepoType>((set) => ({
   products: [],
   addProductOrUpdate: (product) => {
     if (product.id) {

@@ -1,4 +1,4 @@
-import { Product } from "../../../../share/repository/product/Product";
+import { Product } from "../../../share/repository/product/Product";
 
 type EditViewProps = {
   error: string;
@@ -33,7 +33,8 @@ export default function EditView({
           placeholder="Product price"
         />
         <button onClick={addProductOrUpdate}>
-          {product.id ? "Update " : "Add "}Product
+          id: {product.id}
+          {product.id !==0 ? "Update " : "Add "}Product
         </button>
       </div>
       {error && <div>{error}</div>}

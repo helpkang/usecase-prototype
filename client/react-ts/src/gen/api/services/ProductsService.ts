@@ -21,7 +21,7 @@ export class ProductsService {
     ): CancelablePromise<Array<ProductCOVO>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/products/search',
+            url: '/api/products/search',
             query: {
                 'name': name,
                 'price': price,
@@ -39,7 +39,7 @@ export class ProductsService {
     ): CancelablePromise<ProductCOVO> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/products/{id}',
+            url: '/api/products/{id}',
             path: {
                 'id': id,
             },
@@ -58,7 +58,7 @@ export class ProductsService {
     ): CancelablePromise<ProductCOVO> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/products/{id}',
+            url: '/api/products/{id}',
             path: {
                 'id': id,
             },
@@ -77,7 +77,7 @@ export class ProductsService {
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/products/{id}',
+            url: '/api/products/{id}',
             path: {
                 'id': id,
             },
@@ -91,7 +91,7 @@ export class ProductsService {
     public static getAllProducts(): CancelablePromise<Array<ProductCOVO>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/products',
+            url: '/api/products',
         });
     }
     /**
@@ -105,7 +105,7 @@ export class ProductsService {
     ): CancelablePromise<ProductCOVO> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/products',
+            url: '/api/products',
             body: requestBody,
             mediaType: 'application/json',
         });

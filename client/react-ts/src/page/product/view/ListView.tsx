@@ -1,9 +1,9 @@
-import { Product } from "../../../../share/repository/product/Product";
-import { Box } from "../style/Box";
+import { Product } from "../../../share/repository/product/Product";
+import { Box } from "../../../share/style/Box";
 
 type ListViewProps = {
   products: Product[];
-  removeProduct: (id: string) => void;
+  removeProduct: (id: number) => void;
   setProduct: (product: Product) => void;
 };
 
