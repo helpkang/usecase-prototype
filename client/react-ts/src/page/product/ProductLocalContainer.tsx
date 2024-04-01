@@ -1,7 +1,5 @@
-import EditView from "./view/EditView";
-import ListView from "./view/ListView";
 import { useProductLocalUseCase } from "./useProductLocalUseCase";
-import { Box } from "../../share/style/Box";
+import { ProductApiContainerView } from "./ProductApiContainerView";
 
 export default function ProductLocalContainer() {
   const {
@@ -17,30 +15,16 @@ export default function ProductLocalContainer() {
   } = useProductLocalUseCase();
 
   return (
-    <div>
-      <Box>
-        <input
-          type="text"
-          placeholder="Filter products with name"
-          onChange={(event) => setFilterStr(event.target.value)}
-          style={{ width: "90%" }}
-        />
-      </Box>
-      <ListView
-        products={filteredProducts}
-        removeProduct={removeProduct}
-        setProduct={setProduct}
-      />
-      <Box>
-        <EditView
-          product={product}
-          setProduct={setProduct}
-          addProductOrUpdate={addProductOrUpdate}
-          error={error}
-          price={price}
-          setPrice={setPrice}
-        />
-      </Box>
-    </div>
+    <ProductApiContainerView
+      setFilterStr={setFilterStr}
+      filteredProducts={filteredProducts}
+      removeProduct={removeProduct}
+      setProduct={setProduct}
+      product={product}
+      addProductOrUpdate={addProductOrUpdate}
+      error={error}
+      price={price}
+      setPrice={setPrice}
+    />
   );
 }

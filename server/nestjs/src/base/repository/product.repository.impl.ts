@@ -27,7 +27,7 @@ export class ProductRepositoryImpl implements ProductRepository{
     //TODO: id from request body should be removed nestjs problem - Security Risk
     //TODO: remove this console.log 
     console.log('productData', productData);
-    const product = this.productDAO.create(productData);
+    const product = this.productDAO.create({name: productData.name, price: productData.price});
     return this.productDAO.save(product);
   }
 

@@ -5,10 +5,11 @@ import {
   RenderHookResult,
 } from "@testing-library/react";
 
-import { useProductApiUseCase } from "../../local/useProductApilUseCase";
+
 import { createWrapper } from "../../../share/test/createWrapper";
 import { userProductServiceMock } from "./ProductsService.mock";
 import sinon from "ts-sinon";
+import { useProductApiUseCase } from "../useProductApilUseCase";
 describe("useProductUseCase", () => {
   let hook: RenderHookResult<ReturnType<typeof useProductApiUseCase>, unknown>;
 
