@@ -36,6 +36,8 @@ class ProductUseCaseImpl(private val productRepository: ProductRepository) : Pro
                 productRepository.addProduct(newProduct)
             }
 
+            setProduct(ProductInput(0, "", ""))
+
         }
 
     }

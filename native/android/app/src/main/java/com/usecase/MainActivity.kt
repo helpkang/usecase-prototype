@@ -26,10 +26,7 @@ class MainActivity : ComponentActivity() {
     private var id = 0
     private val productUseCase: ProductUseCase = ProductUseCaseImpl(MemoryProductRepository())
 
-    private fun onClick() {
-        val product = Product(++id, "Product1111", 30.0)
-        productUseCase.addProduct(product)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +45,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column {
-                        Button(
-                            onClick = { onClick() }, modifier = Modifier
-                                .width(200.dp)
-                                .height(50.dp)
-                        ) {
-                            Text("Add Product")
-                        }
 
                         Search(setFilterStr = setFilterStr)
 
