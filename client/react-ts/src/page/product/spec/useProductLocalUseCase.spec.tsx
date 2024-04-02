@@ -66,8 +66,8 @@ describe("useProductLocalUseCase", () => {
     });
     await waitFor(async () => {
       expect(result.current.products).not.toContainEqual({
-        id: "1",
-        name: "Test Product",
+        id: 1,
+        name: "T",
         price: 100,
       });
     });
