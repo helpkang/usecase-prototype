@@ -35,6 +35,8 @@ export function useProductApiUseCase() {
   useEffect(() => {
     setError("");
   }, [product]);
+  
+  const {filteredProducts, setFilterStr} = _useFilterProducts(products);
 
   return {
     error,
@@ -45,7 +47,9 @@ export function useProductApiUseCase() {
     removeProduct,
     price,
     setPrice,
-    ..._useFilterProducts(products),
+    filteredProducts,
+    setFilterStr
+
   };
 }
 

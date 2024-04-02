@@ -29,6 +29,8 @@ export function useProductLocalUseCase() {
     setError("");
   }, [product]);
 
+  const {filteredProducts, setFilterStr} = _useFilterProducts(products);
+
   return {
     error,
     product,
@@ -38,7 +40,8 @@ export function useProductLocalUseCase() {
     removeProduct,
     price,
     setPrice,
-    ..._useFilterProducts(products),
+    filteredProducts,
+    setFilterStr
   };
 }
 
