@@ -61,8 +61,8 @@ fun ProductInput(
                 Product(
                     productState.id,
                     productState.name,
-//                    productState.price.toDoubleOrNull() ?: 0.0
-                    3.0
+                    productState.price.toDoubleOrNull() ?: 0.0
+
                 )
 
             )
