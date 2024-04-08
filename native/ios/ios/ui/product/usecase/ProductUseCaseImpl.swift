@@ -16,7 +16,7 @@ class ProductUseCaseImpl: ProductUseCase, ObservableObject {
 
   private var productRepository: ProductRepository
 
-  @Published var filterStr: String = "a"
+  @Published var filterStr = ""
 
   private var cancelAble: AnyCancellable? = nil
 

@@ -8,92 +8,90 @@
 import Combine
 import SwiftUI
 
-struct ContentView: View {
+struct ContentContainer: View {
     @ObservedObject var productUseCase: ProductUseCaseImpl = ProductUseCaseImpl(
         productRepository: MemoryProductRepository())
     
     @ObservedObject var productInputState = ProductInputState()
     
-    //  func setFilterStr(filterStr: String) {
-    //    productUseCase.setFilterStr(filterStr: filterStr)
-    //  }
-    //
-    func setProduct(product: ProductInput) {
-        productInputState.setProduct(productInput: product)
-    }
-    
-    //  func addProduct(product: Product) {
-    //    productUseCase.addProduct(product: product)
-    //  }
-    
-    //    @State var productInput:ProductInput = ProductInput(id: 0, name: "", price: "")
     
     var body: some View {
         VStack {
-            //      SearchView(setFilterStr: setFilterStr)
-            //      ProductInputView(
-            ////        product: productUseCase.product, setProduct: setProduct, addProduct: addProduct)
-            //        )
-            //        ProductionsListView(products: productUseCase.products, setProduct: setProduct)
-            TextField("Name", text: $productInputState.product.name)
-            //                .onChange(
-            //                of: productUseCase.product.name
-            //            )
-            //            { oldValue, newValue in
-            //                setProduct(
-            //                    product: ProductInput(
-            //                        id: productInputRepo.product.id, name: newValue, price: productInputRepo.product.price))
-            //            }
-            TextField("Price", text: $productInputState.product.price)
-            //                .onChange(
-            //                of: productInputRepo.product.price
-            //            )
-            //            { oldValue, newValue in
-            //                setProduct(
-            //                    product: ProductInput(
-            //                        id: productInputRepo.product.id, name: productInputRepo.product.name, price: newValue))
-            //            }
-            //        Button(action: "Add") {
-            Button(action: {
-                if let priceAsDouble = Double(productInputState.product.price) {
-                    productUseCase.addProduct(
-                        product: Product(
-                            id: productInputState.product.id, name: productInputState.product.name, price: priceAsDouble
-                        ))
-                    setProduct(product: ProductInput(id: 0, name: "", price: ""))
-                } else {
-                    print("Invalid price input")
-                }
-            }) {if productInputState.product.id == 0 {
-                Text("ADD")
-            }  else {
-                Text("UPDATE")
-            }
-                
-            }
+            SearchView(filterStr: $productUseCase.filterStr)
+            
+            InputView(productInputState: productInputState, addProduct: productUseCase.addProduct)
+            
             // list of products
-            List($productUseCase.products.projectedValue, id: \.id) { product in
+            List($productUseCase.filteredProducts.projectedValue, id: \.id) { product in
                 
                 HStack {
                     Text(product.name.wrappedValue)
                     Text(String(product.price.wrappedValue))
                     Button("Edit") {
-                        setProduct(
-                            product: ProductInput(
+                        productInputState.setProduct(
+                            productInput: ProductInput(
                                 id: product.id.wrappedValue, name: product.name.wrappedValue,
                                 price: String(product.price.wrappedValue))
                         )
                     }
                 }
-            }.padding()
+            }
             
         }
-        .padding()
     }
 }
 
+
+
 #Preview {
-    ContentView()
+    ContentContainer()
+}
+
+struct SearchView: View {
+
+    @Binding var filterStr: String
+
+    var body: some View {
+        VStack{
+            Text("filter: \(filterStr)")
+            TextField(
+                "Search", text: $filterStr
+            )
+        }
+    }
+}
+
+struct InputView: View {
+    
+    @ObservedObject var productInputState: ProductInputState
+    
+    var addProduct: (_ product: Product)->Void
+    
+    
+    var body: some View {
+        VStack{
+            TextField("Name", text: $productInputState.product.name)
+            
+            TextField("Price", text: $productInputState.product.price)
+            
+                        Button(action: {
+                            if let priceAsDouble = Double(productInputState.product.price) {
+                                addProduct(
+                                    Product(
+                                        id: productInputState.product.id, name: productInputState.product.name, price: priceAsDouble
+                                    ))
+                                productInputState.setProduct(productInput: ProductInput(id: 0, name: "", price: ""))
+                            } else {
+                                print("Invalid price input")
+                            }
+                        }) {if productInputState.product.id == 0 {
+                            Text("ADD")
+                        }  else {
+                            Text("UPDATE")
+                        }
+                        }
+        }
+    }
 }
 
 //struct SearchView: View {
