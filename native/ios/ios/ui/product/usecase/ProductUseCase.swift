@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol ProductUseCase {
-    var products: [Product] { get }
-    func addProduct(product: Product)
+    var products: [Product] { get }    
+    func addProduct()
     func setFilterStr(filterStr: String)
     var filteredProducts: [Product] { get }
 
