@@ -24,8 +24,9 @@ final class ProductUseCaseTest: XCTestCase {
     }
     
     func testAddProduct() {
-        let product = Product(id: 0, name: "Test Product", price: 10.0)
-        productUseCase.addProduct(product: product)
+        let productInput = ProductInput(id: 0, name: "Test Product", price: "10.0")
+        productUseCase.productInputState.setProduct(productInput: productInput)
+        productUseCase.addProduct()
         //TODO: 배열에 직접 넣는 경우 막을 방법이 없는 건지
         //productUseCase.products.append(Product(id: 10, name: "test", price: 10.0))
         XCTAssertEqual(productUseCase.products.count, 1)
@@ -37,14 +38,20 @@ final class ProductUseCaseTest: XCTestCase {
     }
     
     func testUpdateProduct() {
-        let product = Product(id: 0, name: "Test Product", price: 10.0)
-        productUseCase.addProduct(product: product)
+        let productInput = ProductInput(id: 0, name: "Test Product", price: "10.0")
+        productUseCase.productInputState.setProduct(productInput: productInput)
+        productUseCase.addProduct()
         //TODO: 배열에 직접 넣는 경우 막을 방법이 없는 건지
-        let addedProduct = Product(id: 1, name: "Test Product", price: 10.0)
+        var addedProduct = ProductInput(id: 1, name: "Test Product", price: "10.0")
         XCTAssertEqual(productUseCase.products.count, 1)
-        XCTAssertEqual(productUseCase.products[0], addedProduct)
-        productUseCase.addProduct(product: Product(id: 1, name: "new", price: 10.0))
-        XCTAssertEqual(productUseCase.products[0], Product(id: 1, name: "new", price: 10.0))
+        XCTAssertEqual(productUseCase.products[0], Product(id: addedProduct.id, name: addedProduct.name, price: Double(addedProduct.price) ?? 0.0))
+        
+        addedProduct = ProductInput(id: 1, name: "Test Product", price: "10.0")
+        productUseCase.productInputState.setProduct(productInput: addedProduct)
+
+        
+        productUseCase.addProduct()
+        XCTAssertEqual(productUseCase.products[0], Product(id: addedProduct.id, name: addedProduct.name, price: Double(addedProduct.price) ?? 0.0))
         
     }
     
@@ -58,12 +65,15 @@ final class ProductUseCaseTest: XCTestCase {
     func testFilteredProducts() {
         
         // Add multiple products
-        let product1 = Product(id: 0, name: "Test Product 1", price: 10.0)
-        let product2 = Product(id: 0, name: "Test Product 2", price: 20.0)
-        let product3 = Product(id: 0, name: "Another Product", price: 30.0)
-        productUseCase.addProduct(product: product1)
-        productUseCase.addProduct(product: product2)
-        productUseCase.addProduct(product: product3)
+        let product1 = ProductInput(id: 0, name: "Test Product 1", price: "10.0")
+        let product2 = ProductInput(id: 0, name: "Test Product 2", price: "20.0")
+        let product3 = ProductInput(id: 0, name: "Another Product", price: "30.0")
+        productUseCase.productInputState.setProduct(productInput: product1)
+        productUseCase.addProduct()
+        productUseCase.productInputState.setProduct(productInput: product2)
+        productUseCase.addProduct()
+        productUseCase.productInputState.setProduct(productInput: product3)
+        productUseCase.addProduct()
         XCTAssertEqual(productUseCase.products.count, 3)
         
         let filterStr = "Test"

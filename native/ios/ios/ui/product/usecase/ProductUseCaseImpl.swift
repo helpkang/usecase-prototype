@@ -20,7 +20,7 @@ class ProductUseCaseImpl: ProductUseCase, ObservableObject {
     
     private var cancelAble: AnyCancellable? = nil
     
-    let productInputState: ProductInputState
+    var productInputState: ProductInputState
     
     init(productRepository: ProductRepository) {
         self.productRepository = productRepository

@@ -13,5 +13,6 @@ protocol ProductUseCase {
     func addProduct()
     func setFilterStr(filterStr: String)
     var filteredProducts: [Product] { get }
+    var productInputState: ProductInputState { get set}
 
 }
