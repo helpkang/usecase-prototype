@@ -18,6 +18,10 @@ class MemoryProductRepository: ProductRepository {
 
     func addProduct(product: Product) {
         products.append(product)
-        print("arr\(products.count)")
     }
+    
+    func updateProduct(product: Product) {
+        products = products.map { $0.id == product.id ? product : $0 }   
+    }
+    
 }

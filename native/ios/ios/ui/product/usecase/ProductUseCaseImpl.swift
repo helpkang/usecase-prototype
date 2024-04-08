@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class ProductUseCaseImpl: ProductUseCase {
+class ProductUseCaseImpl: ProductUseCase, ObservableObject {
 
   @Published var products: [Product]
 
@@ -16,7 +16,7 @@ class ProductUseCaseImpl: ProductUseCase {
 
   private var productRepository: ProductRepository
 
-  @Published var filterStr: String = ""
+  @Published var filterStr: String = "a"
 
   private var cancelAble: AnyCancellable? = nil
 
@@ -37,7 +37,19 @@ class ProductUseCaseImpl: ProductUseCase {
   }
 
   func addProduct(product: Product) {
-    productRepository.addProduct(product: product)
+    if product.id != 0 {
+      productRepository.updateProduct(product: product)
+    } else {
+      //products max id
+      let id = products.map { product in product.id }.max() ?? 0
+        
+        print("max")
+        print(id)
+
+      //new product with id +1
+      let newProduct = Product(id: id + 1, name: product.name, price: product.price)
+        productRepository.addProduct(product: newProduct)
+    }
   }
 
   func setFilterStr(filterStr: String) {

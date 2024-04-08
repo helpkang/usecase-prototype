@@ -9,11 +9,12 @@ import Foundation
 import Combine
 
 protocol ProductRepository {
-//    var products: Published<[Product]>.Publisher { get }
     var products: [Product] { get }
     
     var productsPub: Published<[Product]>.Publisher { get }
 
-
     func addProduct(product: Product)
+    
+    func updateProduct(product: Product)
+    
 }
