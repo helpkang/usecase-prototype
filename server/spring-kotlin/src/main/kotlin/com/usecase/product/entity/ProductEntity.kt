@@ -1,4 +1,4 @@
-package com.useacae.product.entity
+package com.usecase.product.entity
 
 // jpa product entity
 import javax.persistence.Entity
