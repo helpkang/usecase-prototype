@@ -14,7 +14,7 @@ spring:
     path: /swagger-ui.html
 
   springdoc:
-    paths-to-exclude: /swagger-resources/profile**
+    paths-to-exclude: /swagger-resources/profile-controller
 #  data:
 #    rest:
 #      detection-strategy: annotated
@@ -30,9 +30,3 @@ spring:
 #      path: /h2-console
 #      settings:
 #        web-allow-others: true
-
-blog:
-  title: Blog
-  banner:
-    title: Warning
-    content: The blog will be down tomorrow.

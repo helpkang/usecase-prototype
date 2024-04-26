@@ -5,15 +5,13 @@ package spring.kotlin.mm
 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
-import spring.kotlin.mm.controller.BlogProperties
-import springfox.documentation.swagger2.annotations.EnableSwagger2
+import org.springframework.context.annotation.ComponentScan
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 
-@SpringBootApplication(scanBasePackages = ["spring.kotlin.mm"])
-@EnableConfigurationProperties(BlogProperties::class)
-//@EnableSwagger2
+@SpringBootApplication
 class App
 
 fun main(args: Array<String>) {
