@@ -1,52 +1,48 @@
 //ProductUseCaseTests
 package spring.kotlin.mm.product.usecase
 
-import spring.kotlin.mm.vo.Product
-import spring.kotlin.mm.ProductRepositoryMemoryImpl
+import spring.kotlin.mm.product.repository.ProductRepositoryMemoryImpl
 import org.junit.jupiter.api.BeforeEach
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import spring.kotlin.mm.ProductUseCase
-import spring.kotlin.mm.ProductUseCaseImpl
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.ApplicationContext
+import spring.kotlin.mm.product.usecase.vo.ProductUIVO
 import java.util.NoSuchElementException
 
-//@SpringBootTest
-//@EnableJpaRepositories(basePackages = ["spring.kotlin.mm.product.entity", "spring.kotlin.mm.entity"])
-//@EnableJpaRepositories(basePackages = ["spring.kotlin.mm.product.repository"])
-//@EnableJpaRepositories
+@SpringBootTest(classes = [ProductUseCaseImpl::class, ProductRepositoryMemoryImpl::class])
 class ProductUseCaseTests {
 
 //    @Autowired
     private lateinit var productUseCase: ProductUseCase
 
-//    @Autowired
-//    private lateinit var applicationContext: ApplicationContext
+    @Autowired
+    private lateinit var applicationContext: ApplicationContext
 
     @BeforeEach
     fun setUp() {
-        this.productUseCase = ProductUseCaseImpl(ProductRepositoryMemoryImpl())
-//        this.productUseCase = applicationContext.getBean(ProductUseCase::class.java)
+//        this.productUseCase = ProductUseCaseImpl(ProductRepositoryMemoryImpl())
+        this.productUseCase = applicationContext.getBean(ProductUseCase::class.java)
     }
 
     @Test
     fun `should save product`() {
-        val product = Product(1, "Product 1", 100.0)
-        productUseCase.createProduct(product)
-        val retProduct = productUseCase.getProduct(1)
-        assert(retProduct == product)
+        val productUIVO = ProductUIVO(1, "Product 1", 100.0)
+        productUseCase.createProduct(productUIVO)
+        val productUOVO = productUseCase.getProduct(1)
+        assert( productUIVO.id == productUOVO.id)
+        assert( productUIVO.name == productUOVO.name)
+        assert( productUIVO.price == productUOVO.price)
 
         val retProducts = productUseCase.getProducts()
         assert(retProducts.size == 1)
     }
 
     @Test
-    fun `should delete product by id`() {
-        productUseCase.deleteProduct(1)
-    }
-
-    @Test
     fun `should get product by id`() {
+        productUseCase.deleteProduct(1)
         // java.util.NoSuchElementException: Collection contains no element matching the predicate
         assertThrows<NoSuchElementException> {
             productUseCase.getProduct(1)

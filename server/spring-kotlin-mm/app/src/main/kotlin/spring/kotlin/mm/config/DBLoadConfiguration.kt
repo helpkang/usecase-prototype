@@ -3,8 +3,8 @@ package spring.kotlin.mm.config
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import spring.kotlin.mm.ProductDaoRepository
-import spring.kotlin.mm.ProductEntity
+import spring.kotlin.mm.product.dao.ProductDaoRepository
+import spring.kotlin.mm.product.entity.ProductEntity
 
 @Configuration
 class DBLoadConfiguration {

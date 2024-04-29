@@ -4,15 +4,16 @@
 package spring.kotlin.mm
 
 
+import org.springdoc.core.configuration.SpringDocDataRestConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.autoconfigure.domain.EntityScan
+import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration
 import org.springframework.boot.runApplication
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 
+//@SpringBootApplication(exclude = [RepositoryRestMvcAutoConfiguration::class])
 @SpringBootApplication
 class App
+
 
 fun main(args: Array<String>) {
 	runApplication<App>(*args)
