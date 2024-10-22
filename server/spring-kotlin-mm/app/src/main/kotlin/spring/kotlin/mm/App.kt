@@ -4,13 +4,13 @@
 package spring.kotlin.mm
 
 
-import org.springdoc.core.configuration.SpringDocDataRestConfiguration
+// import org.springdoc.core.configuration.SpringDocDataRestConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration
 import org.springframework.boot.runApplication
 
 
-//@SpringBootApplication(exclude = [RepositoryRestMvcAutoConfiguration::class])
+// @SpringBootApplication(exclude = [RepositoryRestMvcAutoConfiguration::class])
 @SpringBootApplication
 class App
 

@@ -8,9 +8,6 @@ spring:
         globally_quoted_identifiers_skip_column_definitions: true
     hibernate:
       ddl-auto: update
-
-  springdoc:
-    paths-to-exclude: /productEntities/**
   data:
     rest:
       base-path: /api
@@ -21,6 +18,14 @@ spring:
     add-properties: false
   hateoas:
     use-hal-as-default-json-media-type: false
+
+springdoc:
+  paths-to-exclude: /productEntities/**
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
 
 
 

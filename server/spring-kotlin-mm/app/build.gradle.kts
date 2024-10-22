@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "3.2.4"
+	id("org.springframework.boot") version "3.2.10"
 	id("io.spring.dependency-management") version "1.1.4"
 	kotlin("jvm") version "1.9.23"
 	kotlin("plugin.spring") version "1.9.23"
@@ -25,6 +25,7 @@ repositories {
 }
 
 dependencies {
+	implementation ("javax.servlet:javax.servlet-api:4.0.1") 
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -34,20 +35,22 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	kapt("org.springframework.boot:spring-boot-configuration-processor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
-		exclude(module = "mockito-core")
+		// exclude(module = "mockito-core")
 	}
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 	testImplementation("com.ninja-squad:springmockk:4.0.2")
 	implementation("javax.persistence:javax.persistence-api:2.2")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("io.springfox:springfox-boot-starter:3.0.0")
-	runtimeOnly("org.springdoc:springdoc-openapi-kotlin:1.8.0")
-//	runtimeOnly("org.springdoc:springdoc-openapi-ui:1.8.0")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+	// implementation("io.springfox:springfox-boot-starter:3.0.0")
+	// runtimeOnly("org.springdoc:springdoc-openapi-kotlin:1.8.0")
+	// runtimeOnly("org.springdoc:springdoc-openapi-ui:1.8.0")
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
 
+	// implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
-
+	// implementation("org.springdoc:springdoc-openapi-common:1.8.0") // 버전 일치
 }
 
 tasks.withType<KotlinCompile> {
